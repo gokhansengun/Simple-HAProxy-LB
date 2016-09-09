@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+
+  nginx1:
+    image: nginx1
+    build:
+      context: ./Web1
+      dockerfile: ./Dockerfile
+    ports:
+      - "9001:80"
+
+  nginx2:
+    image: nginx2
+    build:
+      context: ./Web2
+      dockerfile: ./Dockerfile
+    ports:
+      - "9002:80"
