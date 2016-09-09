@@ -2,18 +2,26 @@ version: '2'
 
 services:
 
-  nginx1:
-    image: nginx1
+  nginx_web1:
+    image: nginx_behind_ha_proxy_web1
     build:
       context: ./Web1
       dockerfile: ./Dockerfile
     ports:
       - "9001:80"
 
-  nginx2:
-    image: nginx2
+  nginx_web2:
+    image: nginx_behind_ha_proxy_web2
     build:
       context: ./Web2
       dockerfile: ./Dockerfile
     ports:
       - "9002:80"
+
+  haproxy:
+    image: nginx_behind_ha_proxy_haproxy
+    build:
+      context: ./HAProxy
+      dockerfile: ./Dockerfile
+    ports:
+      - "7000:55000"

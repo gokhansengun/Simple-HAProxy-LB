@@ -1,10 +1,11 @@
 all:
-	docker-compose up -d nginx1
-	docker-compose up -d nginx2
-    
-	sleep 5
+	docker-compose up -d nginx_web1
+	docker-compose up -d nginx_web2
 	
-	docker run --name haproxy -p 7000:55000 --restart unless-stopped gsengun/simple-ha-proxy:1.0
+	sleep 2
+	
+	docker-compose up haproxy
 
 clean:
 	docker-compose down -v
+	docker rmi $$(docker images | grep "^nginx_behind_ha_proxy" | awk '{print $$3}')
